@@ -4,17 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>zh-Hans</string>
-		<string>ja</string>
-		<string>de</string>
-		<string>es</string>
-		<string>fr</string>
-		<string>ar</string>
-		<string>lt</string>
-	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Phosphor</string>
 	<key>CFBundleDocumentTypes</key>
@@ -46,14 +35,25 @@
 	<string>com.phosphor.app</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>zh-Hans</string>
+		<string>ja</string>
+		<string>de</string>
+		<string>es</string>
+		<string>fr</string>
+		<string>ar</string>
+		<string>lt</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>Phosphor</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.4.0</string>
+	<string>1.5.0</string>
 	<key>CFBundleVersion</key>
-	<string>17</string>
+	<string>18</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
