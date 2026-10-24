@@ -4,299 +4,108 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phosphor - Free iOS Device Manager for macOS</title>
-<meta name="description" content="Free and open-source iOS device manager for macOS. Full backups, message export, photo extraction, app management, Time Machine restore, device clone. No subscriptions.">
-<meta property="og:title" content="Phosphor - Free iOS Device Manager for macOS">
-<meta property="og:description" content="Open-source replacement for iMazing. 18 features, 7 languages, zero cost.">
+<meta name="description" content="Back up your iPhone, browse your files, and export messages and photos on your Mac. Phosphor is a free, open-source iOS device manager for macOS 14 or later.">
+<link rel="canonical" href="https://www.moamenbasel.com/Phosphor/">
+<meta property="og:title" content="Phosphor - Your iPhone, on your terms">
+<meta property="og:description" content="Local backups, message exports, photos, and device tools. Free and open source for macOS 14 or later.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://momenbasel.github.io/Phosphor/">
-<meta property="og:image" content="https://momenbasel.github.io/Phosphor/og-image.png">
+<meta property="og:url" content="https://www.moamenbasel.com/Phosphor/">
+<meta property="og:image" content="https://www.moamenbasel.com/Phosphor/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Phosphor, free and open-source iOS device manager for macOS">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Phosphor - Free iOS Device Manager for macOS">
-<meta name="twitter:description" content="Open-source replacement for iMazing. 18 features, 7 languages, zero cost.">
-<meta name="twitter:image" content="https://momenbasel.github.io/Phosphor/og-image.png">
-<meta name="theme-color" content="#5856D6">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1024 1024'><rect width='1024' height='1024' rx='230' fill='%235856D6'/><text x='512' y='512' font-family='-apple-system,Helvetica,Arial,sans-serif' font-size='620' font-weight='800' fill='%23fff' text-anchor='middle' dominant-baseline='central'>P</text></svg>">
-<style>
-  :root {
-    --indigo: #5856D6;
-    --indigo-light: #7B79E0;
-    --indigo-dark: #3D3BBF;
-    --bg: #0D0D12;
-    --bg-card: #16161F;
-    --text: #F5F5F7;
-    --text-secondary: #86868B;
-    --border: #2A2A35;
-    --green: #34C759;
-    --red: #FF3B30;
-    --orange: #FF9500;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased;
-  }
-  .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
-
-  /* Nav */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    background: rgba(13,13,18,0.85); border-bottom: 1px solid var(--border);
-  }
-  nav .container { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  nav .logo {
-    font-size: 18px; font-weight: 700; color: var(--text);
-    text-decoration: none; display: flex; align-items: center; gap: 8px;
-  }
-  nav .logo .icon {
-    width: 28px; height: 28px; background: var(--indigo);
-    border-radius: 7px; display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: 800; color: white;
-  }
-  nav .links { display: flex; gap: 24px; align-items: center; }
-  nav .links a { color: var(--text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
-  nav .links a:hover { color: var(--text); }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
-    text-decoration: none; transition: all 0.2s; cursor: pointer;
-  }
-  .btn-primary { background: var(--indigo); color: white; }
-  .btn-primary:hover { background: var(--indigo-light); transform: translateY(-1px); }
-  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-secondary:hover { border-color: var(--indigo); color: var(--indigo-light); }
-
-  /* Hero */
-  .hero {
-    padding: 140px 0 80px; text-align: center;
-    background: radial-gradient(ellipse at 50% 0%, rgba(88,86,214,0.15) 0%, transparent 60%);
-  }
-  .hero .badge {
-    display: inline-block; padding: 6px 14px; border-radius: 20px;
-    background: rgba(88,86,214,0.15); color: var(--indigo-light);
-    font-size: 13px; font-weight: 600; margin-bottom: 20px;
-    border: 1px solid rgba(88,86,214,0.25);
-  }
-  .hero h1 {
-    font-size: clamp(40px, 6vw, 64px); font-weight: 800;
-    letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px;
-  }
-  .hero h1 .gradient {
-    background: linear-gradient(135deg, var(--indigo-light), #A78BFA, var(--indigo));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .hero p { font-size: 18px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; }
-  .hero .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .hero .install-cmd {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--bg-card); border: 1px solid var(--border);
-    padding: 12px 20px; border-radius: 10px; font-family: 'SF Mono', ui-monospace, monospace;
-    font-size: 14px; color: var(--text-secondary); margin-top: 24px;
-    cursor: pointer; transition: border-color 0.2s;
-  }
-  .hero .install-cmd:hover { border-color: var(--indigo); }
-  .hero .install-cmd code { color: var(--text); }
-  .hero .stats {
-    display: flex; gap: 40px; justify-content: center; margin-top: 40px;
-  }
-  .hero .stat { text-align: center; }
-  .hero .stat .num { font-size: 28px; font-weight: 800; color: var(--indigo-light); }
-  .hero .stat .label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
-
-  /* Features */
-  .features { padding: 80px 0; }
-  .features h2 { font-size: 36px; font-weight: 700; text-align: center; margin-bottom: 12px; letter-spacing: -0.02em; }
-  .features .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 48px; font-size: 16px; }
-  .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
-  .feature-card {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 28px; transition: border-color 0.3s, transform 0.3s;
-  }
-  .feature-card:hover { border-color: rgba(88,86,214,0.4); transform: translateY(-2px); }
-  .feature-card .icon-wrap {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: rgba(88,86,214,0.12); display: flex;
-    align-items: center; justify-content: center; font-size: 20px; margin-bottom: 16px;
-  }
-  .feature-card h3 { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
-  .feature-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
-
-  /* New section */
-  .new-features { padding: 60px 0; }
-  .new-features h2 { font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 32px; }
-  .new-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-  .new-item {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px; display: flex; align-items: flex-start; gap: 12px;
-  }
-  .new-item .emoji { font-size: 24px; flex-shrink: 0; }
-  .new-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-  .new-item p { font-size: 12px; color: var(--text-secondary); }
-
-  /* Comparison */
-  .comparison { padding: 80px 0; }
-  .comparison h2 { font-size: 36px; font-weight: 700; text-align: center; margin-bottom: 40px; letter-spacing: -0.02em; }
-  table {
-    width: 100%; border-collapse: collapse;
-    background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border);
-  }
-  th {
-    text-align: left; padding: 16px 20px; font-size: 13px;
-    text-transform: uppercase; letter-spacing: 0.05em;
-    color: var(--text-secondary); background: rgba(0,0,0,0.3); border-bottom: 1px solid var(--border);
-  }
-  td { padding: 14px 20px; font-size: 14px; border-bottom: 1px solid var(--border); }
-  tr:last-child td { border-bottom: none; }
-  .check { color: var(--green); }
-  .cross { color: var(--red); }
-  .highlight-col { background: rgba(88,86,214,0.06); }
-
-  /* CTA */
-  .cta-section { padding: 80px 0; text-align: center; border-top: 1px solid var(--border); }
-  .cta-section h2 { font-size: 32px; font-weight: 700; margin-bottom: 12px; }
-  .cta-section p { color: var(--text-secondary); margin-bottom: 28px; font-size: 16px; }
-
-  /* Footer */
-  footer { padding: 32px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-secondary); font-size: 13px; }
-  footer a { color: var(--indigo-light); text-decoration: none; }
-
-  @media (max-width: 640px) {
-    .feature-grid, .new-grid { grid-template-columns: 1fr; }
-    table { font-size: 12px; }
-    th, td { padding: 10px 12px; }
-    .hero .stats { gap: 20px; }
-  }
-</style>
+<meta name="twitter:description" content="Local backups, message exports, photos, and device tools. Free and open source for macOS 14 or later.">
+<meta name="twitter:image" content="https://www.moamenbasel.com/Phosphor/og-image.png">
+<meta name="theme-color" content="#121219">
+<link rel="icon" type="image/svg+xml" href="app-icon.svg">
+<link rel="stylesheet" href="site.css">
+<script src="site.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Phosphor","applicationCategory":"UtilitiesApplication","operatingSystem":"macOS 14.0 or later","url":"https://www.moamenbasel.com/Phosphor/","downloadUrl":"https://github.com/momenbasel/Phosphor/releases/latest","softwareVersion":"1.5.0","license":"https://github.com/momenbasel/Phosphor/blob/main/LICENSE","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 </head>
 <body>
-
-<nav>
-  <div class="container">
-    <a href="/" class="logo"><span class="icon">P</span> Phosphor</a>
-    <div class="links">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="./" class="logo"><img src="app-icon.svg" width="32" height="32" alt="">Phosphor</a>
+    <nav aria-label="Main navigation">
       <a href="#features">Features</a>
       <a href="#new">What's New</a>
       <a href="#comparison">Compare</a>
       <a href="https://github.com/momenbasel/Phosphor">GitHub</a>
-      <a href="https://github.com/momenbasel/Phosphor/releases/latest" class="btn btn-primary">Download</a>
+    </nav>
+    <a class="button primary header-download" href="https://github.com/momenbasel/Phosphor/releases/latest/download/Phosphor.dmg">Download</a>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+<section class="hero container" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <p class="eyebrow">Your iOS device manager for Mac</p>
+    <h1 id="hero-title">Your iPhone.<br>Your terms.</h1>
+    <p class="hero-description">Keep local backups. Export your conversations. Get photos and files off your iPhone, with a native Mac app.</p>
+    <div class="actions">
+      <a class="button primary" href="https://github.com/momenbasel/Phosphor/releases/latest/download/Phosphor.dmg">Download</a>
+      <a class="button secondary" href="#install">Installation guide</a>
     </div>
   </div>
-</nav>
-
-<section class="hero">
+  <figure class="product-preview">
+    <a href="home-screen.png" aria-label="View full-size screenshot of Phosphor's Home Screen browser"><img src="home-screen.png" width="1624" height="1061" alt="Phosphor's native Mac interface browsing an iPhone Home Screen saved in a local backup" fetchpriority="high"></a>
+    <figcaption>Home Screen browser. <a href="https://github.com/momenbasel/Phosphor/pull/55">Screenshot by shinycake</a>.</figcaption>
+  </figure>
+</section>
+<div class="facts container" aria-label="System requirements and license">
+  <p><strong>macOS 14+</strong><span>Sonoma or later</span></p>
+  <p><strong>Apple silicon + Intel</strong><span>Universal Mac app</span></p>
+  <p><strong>Free and open source</strong><span>MIT license, no subscription</span></p>
+</div>
+<section id="features" class="section container" aria-labelledby="features-title">
+  <div class="section-heading"><h2 id="features-title">More from the backup you already have.</h2><p>Browse your data without restoring your whole phone. Choose what to keep, then export it to your Mac.</p></div>
+  <div class="feature-grid">
+    <article class="feature feature-lead"><p class="feature-label">Backups</p><h3>A local copy.<br>A useful one.</h3><p>Create full or incremental backups, schedule them over USB or Wi-Fi, and explore individual files with the backup browser.</p><p>Open encrypted backups with your password. Export portable <code>.phosphor</code> archives for storage elsewhere.</p><a href="#install">Set up your first backup <span aria-hidden="true">&rarr;</span></a></article>
+    <article class="feature"><h3>Conversations you can keep</h3><p>Read iMessage and SMS from a backup, then export to CSV, HTML, JSON, or plain text. Browse WhatsApp Personal and Business backups too.</p></article>
+    <article class="feature"><h3>Your photos, in your folders</h3><p>Browse backed-up photos and videos, filter your library, and extract selected files with original filenames preserved.</p></article>
+    <article class="feature feature-wide"><h3>Contacts, calendars, and app data</h3><p>Export contacts as vCard or CSV and calendar events as ICS or CSV. Extract app containers from backups and inspect saved Home Screen layouts.</p></article>
+  </div>
+</section>
+<section id="comparison" class="section workflow-section" aria-labelledby="comparison-title">
   <div class="container">
-    <span class="badge">v1.0 - First Release</span>
-    <h1>Your iPhone.<br><span class="gradient">Your rules.</span></h1>
-    <p>A free, open-source iOS device manager that replaces $50/year tools. Backups, messages, photos, app management, device cloning, and more. No subscriptions. No iCloud. No compromises.</p>
-    <div class="cta">
-      <a href="https://github.com/momenbasel/Phosphor/releases/latest" class="btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 12l-4-4h2.5V4h3v4H12L8 12z"/><path d="M2 14h12v-1.5H2V14z"/></svg>
-        Download DMG
-      </a>
-      <a href="https://github.com/momenbasel/Phosphor" class="btn btn-secondary">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        View Source
-      </a>
-    </div>
-    <div class="install-cmd" onclick="navigator.clipboard.writeText('brew tap momenbasel/phosphor && brew install --cask phosphor')">
-      $ <code>brew tap momenbasel/phosphor && brew install --cask phosphor</code>
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" opacity="0.5"><path d="M4 4v10h8V4H4zm7 9H5V5h6v8zM6 2v1h5v1h1V2c0-.6-.4-1-1-1H7c-.6 0-1 .4-1 1z"/></svg>
-    </div>
-    <div class="stats">
-      <div class="stat"><div class="num">18</div><div class="label">Features</div></div>
-      <div class="stat"><div class="num">62</div><div class="label">Source Files</div></div>
-      <div class="stat"><div class="num">7</div><div class="label">Languages</div></div>
-      <div class="stat"><div class="num">0</div><div class="label">Dependencies</div></div>
+    <div class="section-heading"><h2 id="comparison-title">A backup, or a connected device?</h2><p>Different tasks use different sources. Phosphor gives you tools for both.</p></div>
+    <div class="workflow-grid">
+      <article><h3>From a local backup</h3><ul><li>Read and export messages, photos, contacts, and calendars</li><li>Browse files and preview backup contents</li><li>Extract app data and view saved Home Screen layouts</li><li>Unlock encrypted backups with their password</li></ul><p>Your iPhone does not need to stay connected to browse an existing backup.</p></article>
+      <article><h3>With your device connected</h3><ul><li>Create backups and manage backup encryption</li><li>Install IPA files or remove selected apps</li><li>Transfer accessible files through the device file browser</li><li>Inspect battery health, logs, and crash reports</li></ul><p>Unlock your device, connect by USB, and approve the Trust prompt to get started.</p></article>
     </div>
   </div>
 </section>
-
-<section id="features" class="features">
+<section id="new" class="section container release-section" aria-labelledby="release-title">
+  <div class="release-heading"><p class="eyebrow">Latest release</p><h2 id="release-title">What's new in 1.5.0</h2><p>Released <time datetime="2026-10-08">October 8, 2026</time></p><a href="https://github.com/momenbasel/Phosphor/releases/tag/v1.5.0">Read release notes <span aria-hidden="true">&rarr;</span></a></div>
+  <ul class="release-list"><li><h3>See your saved Home Screen</h3><p>Browse the app arrangement, folders, and widgets captured in your backup.</p></li><li><h3>Browse large backups more comfortably</h3><p>Background file loading and previews make the backup browser easier to use.</p></li><li><h3>More control over apps and conversations</h3><p>Bulk app removal with failure details, plus support for both Personal and Business WhatsApp backups.</p></li></ul>
+</section>
+<section id="install" class="section install-section" aria-labelledby="install-title">
   <div class="container">
-    <h2>Everything you need. Nothing you don't.</h2>
-    <p class="subtitle">Built natively with SwiftUI. Powered by libimobiledevice. Zero external dependencies.</p>
-    <div class="feature-grid">
-      <div class="feature-card"><div class="icon-wrap">&#128241;</div><h3>Device Dashboard</h3><p>Auto-detect connected devices. View model, iOS version, serial, UDID, IMEI, battery health, and storage breakdown. Supports iPhone, iPad, and iPod touch.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#128190;</div><h3>Smart Backups</h3><p>Full and incremental backups. Browse contents via Manifest.db. Extract individual files. Scheduled automatic backups via USB or Wi-Fi.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#9200;</div><h3>Time Machine Restore</h3><p>3D animated backup browser inspired by macOS Time Machine. Scroll through backup history and restore any snapshot with one click.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#128172;</div><h3>Message Export</h3><p>iMessage, SMS, and WhatsApp conversations. Export to CSV, HTML, JSON, or plain text. HTML styled with native chat bubbles.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#127748;</div><h3>Photo Extraction</h3><p>Browse Camera Roll from backup. Filter by type. Batch extract with original filenames and structure preserved.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#128230;</div><h3>App Management</h3><p>Install/remove IPAs. Browse app data in backups. Extract individual app containers. Fallback chain supports all ideviceinstaller versions.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#128196;</div><h3>File Browser + Drag-and-Drop</h3><p>Mount device filesystem via AFC. Navigate, copy, delete files. Drop files from Finder to transfer directly to device.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#128260;</div><h3>Device Clone</h3><p>Transfer all data between two devices. Backup source, restore to destination. Progress tracking through both phases.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#9889;</div><h3>Diagnostics</h3><p>Battery health with mAh details. Storage breakdown by category. Real-time syslog streaming with color-coded levels.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#9961;</div><h3>Health Data</h3><p>Browse all HealthKit data types. View samples, workouts, and activity summaries. Apple Watch Activity rings included.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#128221;</div><h3>Notes, Contacts, Calendar</h3><p>Apple Notes with folder browsing. Contacts with vCard export. Calendar events with ICS export. Call log and Safari history.</p></div>
-      <div class="feature-card"><div class="icon-wrap">&#127760;</div><h3>Localized</h3><p>Available in English, Arabic, Spanish, French, German, Japanese, and Chinese. .phosphor archive format for portable backups.</p></div>
+    <div class="section-heading"><h2 id="install-title">Ready for your Mac.</h2><p>Requires macOS Sonoma 14 or later. Install Phosphor, add the device tools, then connect your iPhone or iPad.</p></div>
+    <div class="install-grid">
+      <article class="install-option"><h3>Install with Homebrew</h3><p>The tap installs Phosphor and the libimobiledevice fallback.</p><div class="command"><pre><code id="brew-command">brew tap momenbasel/phosphor
+brew trust --tap momenbasel/phosphor
+brew install --cask phosphor</code></pre><button type="button" class="copy-button" data-copy="brew-command" aria-label="Copy Homebrew installation commands" hidden>Copy</button></div><p class="small">The trust command is for Homebrew 7 and later. Review the <a href="https://github.com/momenbasel/homebrew-phosphor">tap source</a> before trusting it.</p></article>
+      <article class="install-option"><h3>Or download the app</h3><p>Open the disk image and drag Phosphor into Applications.</p><a class="button primary" href="https://github.com/momenbasel/Phosphor/releases/latest/download/Phosphor.dmg">Download</a><p class="small"><a href="https://github.com/momenbasel/Phosphor/releases/latest">Release details and download options</a></p></article>
+      <article class="tool-setup"><div><h3>Add the device tools</h3><p>For the primary device backend, install <a href="https://github.com/doronz88/pymobiledevice3">pymobiledevice3</a>. Phosphor checks for available tools when it launches.</p></div><div class="command"><pre><code id="tools-command">brew install pipx
+pipx install pymobiledevice3</code></pre><button type="button" class="copy-button" data-copy="tools-command" aria-label="Copy device tool installation commands" hidden>Copy</button></div></article>
     </div>
+    <p class="copy-status" role="status" aria-live="polite"></p>
   </div>
 </section>
-
-<section id="new" class="new-features">
-  <div class="container">
-    <h2>New in v1.2.0</h2>
-    <div class="new-grid">
-      <div class="new-item"><div class="emoji">&#9200;</div><div><h4>Time Machine Restore</h4><p>3D animated backup browser with star field</p></div></div>
-      <div class="new-item"><div class="emoji">&#128197;</div><div><h4>Scheduled Backups</h4><p>Hourly, daily, weekly, monthly via USB or Wi-Fi</p></div></div>
-      <div class="new-item"><div class="emoji">&#128260;</div><div><h4>Device Clone</h4><p>Full device-to-device data transfer</p></div></div>
-      <div class="new-item"><div class="emoji">&#9961;</div><div><h4>Apple Watch</h4><p>Watch info, apps, Activity ring history</p></div></div>
-      <div class="new-item"><div class="emoji">&#128101;</div><div><h4>Contacts</h4><p>Browse and export as vCard or CSV</p></div></div>
-      <div class="new-item"><div class="emoji">&#128197;</div><div><h4>Calendar</h4><p>Events with ICS and CSV export</p></div></div>
-      <div class="new-item"><div class="emoji">&#128230;</div><div><h4>.phosphor Archives</h4><p>Portable backup export/import format</p></div></div>
-      <div class="new-item"><div class="emoji">&#127760;</div><div><h4>7 Languages</h4><p>EN, AR, ES, FR, DE, JA, ZH</p></div></div>
-      <div class="new-item"><div class="emoji">&#128295;</div><div><h4>12 Bug Fixes</h4><p>Triple-reviewed by Gemini, Codex, and manual trace</p></div></div>
-    </div>
-  </div>
+<section class="section container faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">Before you connect.</h2>
+  <details><summary>Does Phosphor need an iCloud account?</summary><p>No. Phosphor works with local device backups. Connect an unlocked device, approve the Trust prompt, and create a backup on your Mac.</p></details>
+  <details><summary>Can I open an existing encrypted backup?</summary><p>Yes, with its backup password. Phosphor supports encrypted local backups made by Finder and other compatible tools. The password stays in memory for the session unless you choose to save it in macOS Keychain.</p></details>
+  <details><summary>Why isn't my iPhone detected?</summary><p>Check that your device is unlocked, the USB cable supports data, and you have approved Trust on the device. Make sure pymobiledevice3 is installed, then relaunch Phosphor. See the <a href="https://github.com/momenbasel/Phosphor#troubleshooting">troubleshooting guide</a> for backend and connection checks.</p></details>
+  <details><summary>Can I recover files that aren't in a backup?</summary><p>Backup browsing shows data contained in the selected backup. It cannot recover files that were never included. Available data and live-device tools depend on your iOS version, device permissions, and backup contents.</p></details>
+  <details><summary>Where can I get help or contribute?</summary><p>Read the <a href="https://github.com/momenbasel/Phosphor#readme">documentation</a>, <a href="https://github.com/momenbasel/Phosphor/issues">report a problem</a>, or follow the <a href="https://github.com/momenbasel/Phosphor/blob/main/CONTRIBUTING.md">contribution guide</a>. Phosphor is released under the MIT license.</p></details>
 </section>
-
-<section id="comparison" class="comparison">
-  <div class="container">
-    <h2>How Phosphor compares</h2>
-    <table>
-      <thead>
-        <tr><th>Feature</th><th>Finder</th><th>iMazing ($50/yr)</th><th class="highlight-col">Phosphor (Free)</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Full device backup</td><td class="check">Yes</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Incremental backup</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Scheduled Wi-Fi backup</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Time Machine restore</td><td class="cross">No</td><td class="cross">No</td><td class="highlight-col check"><strong>Yes</strong></td></tr>
-        <tr><td>Device-to-device clone</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Browse backup files</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Export iMessages</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Export WhatsApp</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Photo extraction</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Contacts/Calendar export</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Apple Watch data</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Drag-and-drop transfer</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Backup archive format</td><td class="cross">No</td><td>.imazing</td><td class="highlight-col"><strong>.phosphor</strong></td></tr>
-        <tr><td>Localization</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">7 languages</td></tr>
-        <tr><td>Battery diagnostics</td><td class="cross">No</td><td class="check">Yes</td><td class="highlight-col check">Yes</td></tr>
-        <tr><td>Open source</td><td class="cross">No</td><td class="cross">No</td><td class="highlight-col check"><strong>MIT</strong></td></tr>
-        <tr><td>Price</td><td>Free</td><td>$49.99/yr</td><td class="highlight-col"><strong>Free forever</strong></td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section class="cta-section">
-  <div class="container">
-    <h2>Take control of your device.</h2>
-    <p>No sign-up. No payment. No lock-in. Just download and go.</p>
-    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="https://github.com/momenbasel/Phosphor/releases/latest" class="btn btn-primary">Download Phosphor</a>
-      <a href="https://github.com/momenbasel/Phosphor" class="btn btn-secondary">Star on GitHub</a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>Phosphor is open source under the <a href="https://github.com/momenbasel/Phosphor/blob/main/LICENSE">MIT License</a>. Built by <a href="https://github.com/momenbasel">Moamen Basel</a>.</p>
-  </div>
-</footer>
-
+</main>
+<footer><div class="container footer-inner"><p>Phosphor. Built by <a href="https://github.com/momenbasel">Moamen Basel</a> and contributors.</p><div><a href="https://github.com/momenbasel/Phosphor">GitHub</a><a href="https://github.com/momenbasel/Phosphor/blob/main/LICENSE">MIT license</a><a href="https://www.moamenbasel.com/PureMac/">PureMac</a><a href="https://www.moamenbasel.com/puresnitch/">PureSnitch</a><a href="https://www.moamenbasel.com/pesty/">Pesty</a></div></div></footer>
 </body>
 </html>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="body" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#6F6DEA"/>
+      <stop offset="52%" stop-color="#5654D6"/>
+      <stop offset="100%" stop-color="#4340BE"/>
+    </linearGradient>
+    <radialGradient id="topSheen" cx="0.5" cy="0.12" r="0.85">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.30"/>
+      <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="baseShade" cx="0.5" cy="1.0" r="0.9">
+      <stop offset="0%" stop-color="#1B1A52" stop-opacity="0.45"/>
+      <stop offset="55%" stop-color="#1B1A52" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.55"/>
+      <stop offset="14%" stop-color="#FFFFFF" stop-opacity="0.10"/>
+      <stop offset="60%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="pFill" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#ECECF7"/>
+    </linearGradient>
+    <filter id="pShadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="9" stdDeviation="12" flood-color="#1A1850" flood-opacity="0.28"/>
+    </filter>
+    <clipPath id="bodyClip"><rect x="100" y="100" width="824" height="824" rx="185" ry="185"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#bodyClip)">
+    <rect x="100" y="100" width="824" height="824" fill="url(#body)"/>
+    <rect x="100" y="100" width="824" height="824" fill="url(#baseShade)"/>
+    <rect x="100" y="100" width="824" height="824" fill="url(#topSheen)"/>
+    <g filter="url(#pShadow)">
+      <path transform="translate(292.199 741.000) scale(0.32571 -0.32571)" d="M285.33502197265625 434.33087158203125V696.333984375H632.000732421875Q753.6663818359375 696.333984375 821.6658630371094 758.166748046875Q889.6653442382812 819.99951171875 889.6653442382812 935.9987182617188V937.9987182617188Q889.6653442382812 1054.9979248046875 821.6658630371094 1115.9973449707031Q753.6663818359375 1176.9967651367188 632.000732421875 1176.9967651367188H285.33502197265625V1443H714.6685180664062Q872.669189453125 1443 989.6695861816406 1380.3331909179688Q1106.6699829101562 1317.6663818359375 1171.5034790039062 1204.332763671875Q1236.3369750976562 1090.9991455078125 1236.3369750976562 938.6653442382812V936.6653442382812Q1236.3369750976562 784.33154296875 1171.5034790039062 671.331298828125Q1106.6699829101562 558.3310546875 989.6695861816406 496.3309631347656Q872.669189453125 434.33087158203125 714.6685180664062 434.33087158203125ZM113.33251953125 0V1443H456.004150390625V0Z" fill="url(#pFill)"/>
+    </g>
+  </g>
+  <!-- subtle beveled rim, Apple-style -->
+  <rect x="101.25" y="101.25" width="821.5" height="821.5" rx="184" ry="184"
+        fill="none" stroke="url(#rim)" stroke-width="2.5"/>
+</svg>
